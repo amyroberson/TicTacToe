@@ -11,26 +11,59 @@ import XCTest
 
 class TicTacToeTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var game = Game()
+    
+    func testPlay1() {
+        var result = play(marker: .X, at: 1, at: 1, on: game)
+        XCTAssertEqual(result.0.lastPlayed, .X)
+        XCTAssert(result.1)
+        result = play(marker: .O, at: 0, at: 1, on: result.0)
+        XCTAssert(result.1)
+        XCTAssertEqual(result.0.board[0][1], .O)
+        XCTAssertEqual(result.0.board[1][1], .X)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testPlay2() {
+        var result = play(marker: .O, at: 1, at: 1, on: game)
+        XCTAssertEqual(result.0.lastPlayed, .O)
+        XCTAssert(result.1)
+        result = play(marker: .X, at: 2, at: 2, on: result.0)
+        XCTAssert(result.1)
+        XCTAssertEqual(result.0.board[1][1], .O)
+        XCTAssertEqual(result.0.board[2][2], .X)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testPlay3() {
+        var result = play(marker: .O, at: 1, at: 1, on: game)
+        XCTAssertEqual(result.0.lastPlayed, .O)
+        XCTAssert(result.1)
+        result = play(marker: .X, at: 2, at: 2, on: result.0)
+        result = play(marker: .O, at: 2, at: 1, on: result.0)
+        XCTAssert(result.1)
+        result = play(marker: .X, at: 0, at: 0, on: result.0)
+        XCTAssert(result.1)
+        XCTAssertEqual(result.0.board[1][1], .O)
+        XCTAssertEqual(result.0.board[2][2], .X)
+        XCTAssertEqual(result.0.board[2][1], .O)
+        XCTAssertEqual(result.0.board[0][0], .X)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testPlay4() {
+        var result = play(marker: .O, at: 1, at: 1, on: game)
+        XCTAssertEqual(result.0.lastPlayed, .O)
+        XCTAssert(result.1)
+        result = play(marker: .X, at: 2, at: 2, on: result.0)
+        result = play(marker: .O, at: 2, at: 1, on: result.0)
+        XCTAssert(result.1)
+        result = play(marker: .X, at: 0, at: 0, on: result.0)
+        result = play(marker: .O, at: 1, at: 2, on: result.0)
+        result = play(marker: .X, at: 2, at: 0, on: result.0)
+        XCTAssert(result.1)
+        XCTAssertEqual(result.0.board[1][1], .O)
+        XCTAssertEqual(result.0.board[2][2], .X)
+        XCTAssertEqual(result.0.board[2][1], .O)
+        XCTAssertEqual(result.0.board[0][0], .X)
+        XCTAssertEqual(result.0.board[1][2], .O)
+        XCTAssertEqual(result.0.board[2][0], .X)
     }
-    
 }
