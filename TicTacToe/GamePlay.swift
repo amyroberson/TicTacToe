@@ -19,16 +19,17 @@ func play(marker: Marker, at row: Int, at column: Int, on game: Game) -> (Game, 
     
     newGame.lastPlayed = marker
     
-    if row < 3 {
-        if column < 3 {
-            if game.board[row][column] == .Empty {
-                newBoard[row][column] = marker
+    if row < 3 && row > -1 {
+        if column < 3 && column > -1 {
+            if game.board[row][column] == .empty { //if matric.grid[x] == .empty
+                newBoard[row][column] = marker       //matrix.grid[x] = marker
                 newGame.board = newBoard
-                if (theWinnerIs(board: newGame.board) == .X) {
+                if (theWinnerIs(board: newGame.board) == .x) {
                     print("X Wins!")
-                } else if (theWinnerIs(board: newGame.board) == .O) {
+                } else if (theWinnerIs(board: newGame.board) == .o) {
                     print("O Wins!")
                 }
+                print("Invalid Board Space")
                 return (newGame, true)
             }
         }
@@ -36,40 +37,48 @@ func play(marker: Marker, at row: Int, at column: Int, on game: Game) -> (Game, 
     return (game, false)
 }
 
+
+var round1 = Game(lastPlayed: .x, board: [[.empty, .empty, .empty],
+                                           [.empty, .o, .empty],
+                                           [.empty, .empty, .empty]])
+
+
+
+
 func theWinnerIs(board: [[Marker]]) -> Marker {
-    if (board[0][0] == .X) && (board[0][1] == .X) && (board[0][2] == .X) {
-        return .X
-    } else if (board[1][0] == .X) && (board[1][1] == .X) && (board[1][2] == .X) {
-        return .X
-    } else if (board[2][0] == .X) && (board[2][1] == .X) && (board[2][2] == .X) {
-        return .X
-    } else if (board[0][0] == .O) && (board[0][1] == .O) && (board[0][2] == .O) {
-        return .O
-    } else if (board[1][0] == .O) && (board[1][1] == .O) && (board[1][2] == .O) {
-        return .O
-    } else if (board[2][0] == .O) && (board[2][1] == .O) && (board[2][2] == .O) {
-        return .O
-    } else if (board[0][0] == .X) && (board[1][0] == .X) && (board[2][0] == .X) {
-        return .X
-    } else if (board[0][1] == .X) && (board[1][1] == .X) && (board[2][1] == .X) {
-        return .X
-    } else if (board[0][2] == .X) && (board[1][2] == .X) && (board[2][2] == .X) {
-        return .X
-    } else if (board[0][0] == .O) && (board[1][0] == .O) && (board[2][0] == .O) {
-        return .O
-    } else if (board[0][1] == .O) && (board[1][1] == .O) && (board[2][1] == .O) {
-        return .O
-    } else if (board[0][2] == .O) && (board[1][2] == .O) && (board[2][2] == .O) {
-        return .O
-    } else if (board[0][0] == .X) && (board[1][1] == .X) && (board[2][2] == .X) {
-        return .X
-    } else if (board[0][2] == .X) && (board[1][1] == .X) && (board[2][0] == .X) {
-        return .X
-    } else if (board[0][0] == .O) && (board[1][1] == .O) && (board[2][2] == .O) {
-        return .O
-    } else if (board[0][2] == .O) && (board[1][1] == .O) && (board[2][0] == .O) {
-        return .O
+    if (board[0][0] == .x) && (board[0][1] == .x) && (board[0][2] == .x) {
+        return .x
+    } else if (board[1][0] == .x) && (board[1][1] == .x) && (board[1][2] == .x) {
+        return .x
+    } else if (board[2][0] == .x) && (board[2][1] == .x) && (board[2][2] == .x) {
+        return .x
+    } else if (board[0][0] == .o) && (board[0][1] == .o) && (board[0][2] == .o) {
+        return .o
+    } else if (board[1][0] == .o) && (board[1][1] == .o) && (board[1][2] == .o) {
+        return .o
+    } else if (board[2][0] == .o) && (board[2][1] == .o) && (board[2][2] == .o) {
+        return .o
+    } else if (board[0][0] == .x) && (board[1][0] == .x) && (board[2][0] == .x) {
+        return .x
+    } else if (board[0][1] == .x) && (board[1][1] == .x) && (board[2][1] == .x) {
+        return .x
+    } else if (board[0][2] == .x) && (board[1][2] == .x) && (board[2][2] == .x) {
+        return .x
+    } else if (board[0][0] == .o) && (board[1][0] == .o) && (board[2][0] == .o) {
+        return .o
+    } else if (board[0][1] == .o) && (board[1][1] == .o) && (board[2][1] == .o) {
+        return .o
+    } else if (board[0][2] == .o) && (board[1][2] == .o) && (board[2][2] == .o) {
+        return .o
+    } else if (board[0][0] == .x) && (board[1][1] == .x) && (board[2][2] == .x) {
+        return .x
+    } else if (board[0][2] == .x) && (board[1][1] == .x) && (board[2][0] == .x) {
+        return .x
+    } else if (board[0][0] == .o) && (board[1][1] == .o) && (board[2][2] == .o) {
+        return .o
+    } else if (board[0][2] == .o) && (board[1][1] == .o) && (board[2][0] == .o) {
+        return .o
     } else {
-        return .Empty
+        return .empty
     }
 }

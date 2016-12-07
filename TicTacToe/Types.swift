@@ -9,17 +9,39 @@
 import Foundation
 
 enum Marker{
-    case X
-    case O
-    case Empty
+    case x
+    case o
+    case empty
 }
 
 struct Game {
-    var lastPlayed: Marker = .Empty
-    var board: [[Marker]] = [[.Empty, .Empty, .Empty],
-                             [.Empty, .Empty, .Empty],
-                             [.Empty, .Empty, .Empty]]
+    var lastPlayed: Marker = .empty
+    var board: [[Marker]] = [[.empty, .empty, .empty],
+                             [.empty, .empty, .empty],
+                             [.empty, .empty, .empty]]
     
 }
 
+struct Game2 { //Board
+    var lastPlayed: Marker = .empty
+    let rows = 3, columns = 3
+    var grid: [Marker]
+    init() {
+        self.grid = Array(repeating: .empty, count: rows * columns)
+    }
+    subscript(row: Int, column: Int) -> Marker {
+        get {
+            if (row < rows && row > -1) && (column < columns && column > -1) {
+                return grid[(row * columns) + column] // for 0,0 = true,
+            } else {
+                fatalError("Invalid InPut")
+            }
+        }
+        
+        set {
+            grid[(row * columns) + column] = newValue
+        }
+    }
+    
+}
 
